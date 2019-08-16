@@ -1,0 +1,13 @@
+#clock {
+    font-size: 40px;
+    text-align: center;
+}
+
+.timer, .alarm, .form{
+    text-align: center;
+    margin-top: 20px;
+}
+
+#hour, #minute {
+    margin: 0 10px;
+}
