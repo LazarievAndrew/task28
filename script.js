@@ -11,9 +11,8 @@
 // будильник можно поставить 2 видов на заданное время
 //  или через определенное время
 
-var clock = document.getElementById('clock');
 
-function time() {
+function clock() {
 
   let date = new Date();
 
@@ -26,39 +25,36 @@ function time() {
   let hours = date.getHours();
   hours < 10 ? hours = '0' + hours : hours;
 
-  clock.innerHTML = `${hours}:${minutes}:${seconds}`;
+  document.getElementById('clock').innerHTML = `${hours}:${minutes}:${seconds}`;
 };
 
-setInterval(time);
 
-let getMSec = (minutes) => minutes * 60000;
+setInterval(clock);
 
-let audio = new Audio ();
-audio.src = './audio/alarm-clock-buzzer-beeps.mp3';
 
-let alarm = () => audio.play();
+const audio = new Audio(src = './audio/alarm-clock-buzzer-beeps.mp3');
 
-let setTimer = timer.onclick = () => {
+
+document.getElementById('timer').onclick = function(){
+
   let getMin = +prompt ('Введите время до оповещения в минутах:');
+
   if (!isNaN(getMin) && getMin){
-    let x = getMSec(getMin);
-    setTimeout (alarm, x);
+
+    setTimeout (() => audio.play(), getMin*60000);
+
   } else {
-    setTimer();
+
+    timer.onclick();
   }; 
 };
 
-let stopTimer = document.getElementById('stop--timer');
-
-stopTimer.onclick = () => audio.pause();
-
-let getValue = (x) => {
-  let select = document.getElementById(x);
-  let value = select.value;
-  return value;
+document.getElementById('stop--timer').onclick = function(){
+  return audio.pause();
 };
 
-let getAlarm = () => {
+function getAlarm(){
+  
   let d = new Date();
 
   let m = d.getMinutes();
@@ -68,19 +64,19 @@ let getAlarm = () => {
   h < 10 ? h = '0' + h : h;
 
   let check = document.getElementById('alarmOn');
-  let getHour = getValue('hour');
-  let getMinute = getValue('minute');
+  let getHour = document.getElementById('hour').value;
+  let getMinute = document.getElementById('minute').value;
 
   if (check.checked && (+getHour === +h && +getMinute === +m)) {
     audio.play();
   };
 };
 
-let setAlarm = document.getElementById('alarm');
+document.getElementById('alarmOn').onclick = function(){
+  setInterval(getAlarm, 1000);
+};
 
-setAlarm.onclick = () => setInterval(getAlarm, 1000);
-
-let stopAlarm = document.getElementById('stop--alarm');
-
-stopAlarm.onclick = () => audio.pause();
+document.getElementById('stop--alarm').onclick = function(){
+  return audio.pause();
+}
   
