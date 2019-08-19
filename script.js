@@ -17,13 +17,13 @@ function clock() {
   let date = new Date();
 
   let seconds = date.getSeconds();
-  seconds < 10 ? seconds = '0' + seconds : seconds;
+  seconds < 10 ? seconds = `0${seconds}` : seconds;
   
   let minutes = date.getMinutes();
-  minutes < 10 ? minutes = '0' + minutes : minutes;
+  minutes < 10 ? minutes = `0${minutes}` : minutes;
 
   let hours = date.getHours();
-  hours < 10 ? hours = '0' + hours : hours;
+  hours < 10 ? hours = `0${hours}` : hours;
 
   document.getElementById('clock').innerHTML = `${hours}:${minutes}:${seconds}`;
 };
@@ -54,20 +54,16 @@ document.getElementById('stop--timer').onclick = function(){
 };
 
 function getAlarm(){
-  
-  let d = new Date();
 
-  let m = d.getMinutes();
-  m < 10 ? m = '0' + m : m;
-
-  let h = d.getHours();
-  h < 10 ? h = '0' + h : h;
+  let date = new Date();
+  let minute = date.getMinutes();
+  let hour = date.getHours();
 
   let check = document.getElementById('alarmOn');
   let getHour = document.getElementById('hour').value;
   let getMinute = document.getElementById('minute').value;
 
-  if (check.checked && (+getHour === +h && +getMinute === +m)) {
+  if (check.checked && (+getHour === +hour && +getMinute === +minute)) {
     audio.play();
   };
 };
