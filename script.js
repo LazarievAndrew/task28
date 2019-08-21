@@ -13,23 +13,12 @@
 
 
 function clock() {
-
-  let date = new Date();
-
-  let seconds = date.getSeconds();
-  seconds < 10 ? seconds = `0${seconds}` : seconds;
   
-  let minutes = date.getMinutes();
-  minutes < 10 ? minutes = `0${minutes}` : minutes;
-
-  let hours = date.getHours();
-  hours < 10 ? hours = `0${hours}` : hours;
-
-  return document.getElementById('clock').innerHTML = `${hours}:${minutes}:${seconds}`;
+  var date = new Date();
+  return document.getElementById("clock").innerHTML = date.toLocaleTimeString();
 };
 
 setInterval(clock);
-
 
 const audio = new Audio(src = './audio/alarm-clock-buzzer-beeps.mp3');
 
