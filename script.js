@@ -47,7 +47,7 @@ function getMSecToAlarm (time, id){
 
   const hourNow = +arrTime[0];
   const minuteNow = +arrTime[1];
-  const secondNow = +arrTime[2];
+  // const secondNow = +arrTime[2];  //// для классики, см. ниже
 
   const getAlarmTime = document.getElementById(id).value.split(':');
 
@@ -60,15 +60,26 @@ function getMSecToAlarm (time, id){
 
   const dayInMsec = 24 * 60 * 60 * 1000;
 
-  var timeNowInMSec = hourNow * 3600000 + minuteNow * 60000 + secondNow * 1000;
+  var timeNowInMSec = arrTime.reduceRight ((sum, current, index)=>{    //// решил поиграться, заодно получше понять)
+    
+    return sum + current * 1000 * (60 ** ((arrTime.length-1) - (index)));
+  }, 0);
+
+  // var timeNowInMSec = hourNow * 3600000 + minuteNow * 60000 + secondNow * 1000;  //// либо классика)
+
+  var timeToAlarmInMsecFromMidnight = getAlarmTime.reduce((sum, current, index)=>{
+    return sum + current * 1000 * (60 ** (getAlarmTime.length - index));
+  }, 0);
+  
+  // var timeToAlarmInMsecFromMidnight = alarmHour * 3600000 + alarmMinute * 60000; ///либо классика)
 
   if (hourNow > alarmHour || hourNow === alarmHour && minuteNow >= alarmMinute){
 
-    return dayInMsec - timeNowInMSec + alarmHour * 3600000 + alarmMinute * 60000;
+    return dayInMsec - timeNowInMSec + timeToAlarmInMsecFromMidnight;
 
   } else {
 
-    return (alarmHour * 3600000 + alarmMinute * 60000) - timeNowInMSec;
+    return (timeToAlarmInMsecFromMidnight) - timeNowInMSec;
   }
 };
 
