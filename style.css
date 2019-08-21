@@ -3,11 +3,7 @@
     text-align: center;
 }
 
-.timer, .form{
+.timer, .form, .check{
     text-align: center;
     margin-top: 20px;
-}
-
-#hour, #minute {
-    margin: 0 10px;
 }
