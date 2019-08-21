@@ -67,7 +67,7 @@ function getMSecToAlarm (time, id){
 
   // var timeNowInMSec = hourNow * 3600000 + minuteNow * 60000 + secondNow * 1000;  //// либо классика)
 
-  var timeToAlarmInMsecFromMidnight = getAlarmTime.reduce((sum, current, index)=>{
+  var timeToAlarmInMsecFromMidnight = getAlarmTime.reduce((sum, current, index)=>{  //// решил поиграться, заодно получше понять)
     return sum + current * 1000 * (60 ** (getAlarmTime.length - index));
   }, 0);
   
